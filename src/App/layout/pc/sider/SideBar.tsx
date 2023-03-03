@@ -13,6 +13,7 @@ const SideBar = (props: SideBarProps) => {
 }
 
 const SideBarTag = styled("div")<{ width: number }>`
+  flex-shrink: 0;
   width: ${(props) => props.width}px;
   height: 100%;
   background: #001529;

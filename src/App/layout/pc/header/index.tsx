@@ -27,13 +27,14 @@ const HeaderWrap = styled("div")`
 `
 
 const HeaderTag = styled("div")<{ height: number }>`
+  flex-shrink: 0;
   width: 100%;
   height: ${(props) => props.height}px;
   background: #ffffff;
 `
 
 const ContentTag = styled("div")`
-  height: 100%;
+  flex-grow: 1;
   overflow: auto;
 `
 
