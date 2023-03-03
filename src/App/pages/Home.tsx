@@ -11,6 +11,8 @@ const Home = () => {
   )
 }
 
-const HomeTag = styled("div")``
+const HomeTag = styled("div")`
+  background: #ffffff;
+`
 
 export default Home

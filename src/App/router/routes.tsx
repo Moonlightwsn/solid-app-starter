@@ -6,27 +6,29 @@ import type { RouteDefinition } from "@solidjs/router"
 const routes: RouteDefinition[] = [
   {
     path: "/",
-    component: lazy(() => import("../layout/Blank")),
+    component: lazy(() => import("../layout/pc/SiderLayout")),
     children: [
       {
-        path: "/",
-        component: lazy(() => import("../layout/pc/sider/index")),
-        children: [
-          {
-            path: "/",
-            component: lazy(() => import("../layout/pc/header/index")),
-            children: [
-              {
-                path: "home",
-                component: lazy(() => import("../pages/Home")),
-              },
-              {
-                path: "about",
-                component: lazy(() => import("../pages/About")),
-              },
-            ],
-          },
-        ],
+        path: "/home",
+        component: lazy(() => import("../pages/Home")),
+      },
+      {
+        path: "/about",
+        component: lazy(() => import("../pages/About")),
+      },
+    ],
+  },
+  {
+    path: "/headerlayout",
+    component: lazy(() => import("../layout/pc/HeaderLayout")),
+    children: [
+      {
+        path: "/home",
+        component: lazy(() => import("../pages/Home")),
+      },
+      {
+        path: "/about",
+        component: lazy(() => import("../pages/About")),
       },
     ],
   },

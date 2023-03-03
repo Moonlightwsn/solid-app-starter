@@ -1,23 +1,27 @@
 import { mergeProps, children, JSX } from "solid-js"
 import { styled } from "solid-styled-components"
 
-type SideBarProps = {
+type SiderProps = {
   width?: number
+  class?: string
   children?: JSX.Element
 }
 
-const SideBar = (props: SideBarProps) => {
+const Sider = (props: SiderProps) => {
   const merged = mergeProps({ width: 200 }, props)
   const c = children(() => merged.children)
-  return <SideBarTag width={merged.width}>{c()}</SideBarTag>
+  return (
+    <SiderTag class={merged.class} width={merged.width}>
+      {c()}
+    </SiderTag>
+  )
 }
 
-const SideBarTag = styled("div")<{ width: number }>`
+const SiderTag = styled("aside")<{ width: number }>`
   flex-shrink: 0;
   width: ${(props) => props.width}px;
   height: 100%;
-  background: #001529;
   overflow: auto;
 `
 
-export default SideBar
+export default Sider

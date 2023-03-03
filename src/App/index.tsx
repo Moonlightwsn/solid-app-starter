@@ -2,9 +2,7 @@ import { useRoutes } from "@solidjs/router"
 
 import routes from "./router/routes"
 
-import type { Component } from "solid-js"
-
-const App: Component = () => {
+const App = () => {
   const Route = useRoutes(routes)
   return <Route />
 }
