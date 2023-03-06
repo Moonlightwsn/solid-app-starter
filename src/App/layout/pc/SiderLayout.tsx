@@ -9,11 +9,12 @@ const headerHeight = 64
 const siderWidth = 200
 const siderCollapsedWidth = 80
 
+const [collapsed, setCollapsed] = createSignal<boolean>()
+const rightContentMarginLeft = () =>
+  collapsed() ? siderCollapsedWidth : siderWidth
+const triggerText = () => (collapsed() ? "展开侧边栏" : "收起侧边栏")
+
 const SiderLayout = () => {
-  const [collapsed, setCollapsed] = createSignal<boolean>()
-  const headerContentMarginLeft = () =>
-    collapsed() ? siderCollapsedWidth : siderWidth
-  const triggerText = () => (collapsed() ? "展开侧边栏" : "收起侧边栏")
   return (
     <Blank>
       <Layout direction="row">
@@ -25,14 +26,17 @@ const SiderLayout = () => {
         ></Layout.Sider>
         <Layout>
           <Layout.Header class={HeaderClass} fixed height={headerHeight}>
-            <HeaderContentTag marginLeft={headerContentMarginLeft()}>
+            <HeaderContentTag marginLeft={rightContentMarginLeft()}>
               <TriggerButton onClick={() => setCollapsed((c) => !c)}>
                 {triggerText()}
               </TriggerButton>
             </HeaderContentTag>
           </Layout.Header>
           <Layout.Content class={ContentClass}>
-            <Outlet />
+            <MainContentTag marginLeft={rightContentMarginLeft()}>
+              <Outlet />
+            </MainContentTag>
+
             <Layout.Footer class={FooterClass}>
               Solid App Starter ©{new Date().getFullYear()} Created by MoMo
             </Layout.Footer>
@@ -53,7 +57,7 @@ const HeaderClass = css`
 
 const ContentClass = css`
   background: #f5f5f5;
-  margin: ${headerHeight.toString()}px 0 0 ${siderWidth.toString()}px;
+  margin-top: ${headerHeight.toString()}px;
   padding: 24px 48px 0;
 `
 
@@ -67,6 +71,11 @@ const HeaderContentTag = styled("div")<{ marginLeft: number }>`
   margin-left: ${(props) => props.marginLeft}px;
   padding: 8px 12px;
   height: 100%;
+  transition: all 0.2s;
+`
+
+const MainContentTag = styled("div")<{ marginLeft: number }>`
+  margin-left: ${(props) => props.marginLeft}px;
   transition: all 0.2s;
 `
 
