@@ -13,7 +13,6 @@ const Content = (props: ContentProps) => {
 
 const ContentTag = styled("main")`
   flex: auto;
-  overflow: auto;
 `
 
 export default Content

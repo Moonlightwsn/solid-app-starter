@@ -4,13 +4,20 @@ import { css } from "solid-styled-components"
 import Blank from "../../components/layout/Blank"
 import Layout from "../../components/layout/pc"
 
+const headerHeight = 64
+const siderWidth = 200
+
 const SiderLayout = () => {
   return (
     <Blank>
       <Layout direction="row">
-        <Layout.Sider class={SiderClass}></Layout.Sider>
+        <Layout.Sider class={SiderClass} width={siderWidth}></Layout.Sider>
         <Layout>
-          <Layout.Header class={HeaderClass}></Layout.Header>
+          <Layout.Header
+            class={HeaderClass}
+            fixed
+            height={headerHeight}
+          ></Layout.Header>
           <Layout.Content class={ContentClass}>
             <Outlet />
             <Layout.Footer class={FooterClass}>
@@ -33,7 +40,7 @@ const HeaderClass = css`
 
 const ContentClass = css`
   background: #f5f5f5;
-  padding: 24px 48px;
+  padding: ${String(headerHeight + 24)}px 48px 24px ${String(siderWidth + 48)}px;
 `
 
 const FooterClass = css`
