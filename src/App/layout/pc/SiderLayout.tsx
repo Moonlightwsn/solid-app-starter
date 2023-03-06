@@ -1,23 +1,36 @@
+import { createSignal } from "solid-js"
 import { Outlet } from "@solidjs/router"
-import { css } from "solid-styled-components"
+import { css, styled } from "solid-styled-components"
 
 import Blank from "../../components/layout/Blank"
 import Layout from "../../components/layout/pc"
 
 const headerHeight = 64
 const siderWidth = 200
+const siderCollapsedWidth = 80
 
 const SiderLayout = () => {
+  const [collapsed, setCollapsed] = createSignal<boolean>()
+  const headerContentMarginLeft = () =>
+    collapsed() ? siderCollapsedWidth : siderWidth
+  const triggerText = () => (collapsed() ? "展开侧边栏" : "收起侧边栏")
   return (
     <Blank>
       <Layout direction="row">
-        <Layout.Sider class={SiderClass} width={siderWidth}></Layout.Sider>
+        <Layout.Sider
+          class={SiderClass}
+          width={siderWidth}
+          collapsed={collapsed()}
+          collapsedWidth={siderCollapsedWidth}
+        ></Layout.Sider>
         <Layout>
-          <Layout.Header
-            class={HeaderClass}
-            fixed
-            height={headerHeight}
-          ></Layout.Header>
+          <Layout.Header class={HeaderClass} fixed height={headerHeight}>
+            <HeaderContentTag marginLeft={headerContentMarginLeft()}>
+              <TriggerButton onClick={() => setCollapsed((c) => !c)}>
+                {triggerText()}
+              </TriggerButton>
+            </HeaderContentTag>
+          </Layout.Header>
           <Layout.Content class={ContentClass}>
             <Outlet />
             <Layout.Footer class={FooterClass}>
@@ -40,13 +53,36 @@ const HeaderClass = css`
 
 const ContentClass = css`
   background: #f5f5f5;
-  padding: ${String(headerHeight + 24)}px 48px 24px ${String(siderWidth + 48)}px;
+  margin: ${headerHeight.toString()}px 0 0 ${siderWidth.toString()}px;
+  padding: 24px 48px 0;
 `
 
 const FooterClass = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+const HeaderContentTag = styled("div")<{ marginLeft: number }>`
+  margin-left: ${(props) => props.marginLeft}px;
+  padding: 8px 12px;
+  height: 100%;
+  transition: all 0.2s;
+`
+
+const TriggerButton = styled("button")`
+  border: 0;
+  border-radius: 6px;
+  padding: 4px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 32px;
+  background-color: #1677ff;
+  color: #fff;
+  box-shadow: 0 2px 0 rgb(5 145 255 / 10%);
+  &:hover {
+    background-color: #4096ff;
+  }
 `
 
 export default SiderLayout

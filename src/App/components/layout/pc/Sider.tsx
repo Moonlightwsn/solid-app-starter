@@ -4,15 +4,24 @@ import { styled } from "solid-styled-components"
 type SiderProps = {
   width?: number
   fixed?: boolean | number
+  collapsed?: boolean
+  collapsedWidth?: number
   class?: string
   children?: JSX.Element
 }
 
 const Sider = (props: SiderProps) => {
-  const merged = mergeProps({ fixed: true, width: 200 }, props)
+  const merged = mergeProps(
+    { fixed: true, width: 200, collapsed: false, collapsedWidth: 80 },
+    props
+  )
   const c = children(() => merged.children)
   return (
-    <SiderTag class={merged.class} fixed={merged.fixed} width={merged.width}>
+    <SiderTag
+      class={merged.class}
+      fixed={merged.fixed}
+      width={merged.collapsed ? merged.collapsedWidth : merged.width}
+    >
       {c()}
     </SiderTag>
   )
@@ -35,6 +44,7 @@ const SiderTag = styled("aside")<{ width: number; fixed: boolean | number }>(
       width: ${props.width}px;
       height: 100%;
       overflow: auto;
+      transition: all .2s;
     `
   }
 )

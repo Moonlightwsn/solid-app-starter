@@ -4,11 +4,17 @@ import { css } from "solid-styled-components"
 import Blank from "../../components/layout/Blank"
 import Layout from "../../components/layout/pc"
 
+const headerHeight = 64
+
 const HeaderLayout = () => {
   return (
     <Blank>
       <Layout>
-        <Layout.Header class={HeaderClass}></Layout.Header>
+        <Layout.Header
+          class={HeaderClass}
+          fixed
+          height={headerHeight}
+        ></Layout.Header>
         <Layout.Content class={ContentClass}>
           <Outlet />
           <Layout.Footer class={FooterClass}>
@@ -26,6 +32,7 @@ const HeaderClass = css`
 
 const ContentClass = css`
   background: #f5f5f5;
+  margin: ${headerHeight.toString()}px;
   padding: 24px 48px 0;
 `
 
