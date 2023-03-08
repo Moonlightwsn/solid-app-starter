@@ -5,8 +5,6 @@ const About: Component = () => {
   return <AboutTag>About Page</AboutTag>
 }
 
-const AboutTag = styled("div")`
-  background: #ffffff;
-`
+const AboutTag = styled("div")``
 
 export default About

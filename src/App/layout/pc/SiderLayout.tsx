@@ -37,8 +37,10 @@ const SiderLayout = () => {
               <Outlet />
             </MainContentTag>
 
-            <Layout.Footer class={FooterClass}>
-              Solid App Starter ©{new Date().getFullYear()} Created by MoMo
+            <Layout.Footer>
+              <FooterContentTag marginLeft={rightContentMarginLeft()}>
+                Solid App Starter ©{new Date().getFullYear()} Created by MoMo
+              </FooterContentTag>
             </Layout.Footer>
           </Layout.Content>
         </Layout>
@@ -61,12 +63,6 @@ const ContentClass = css`
   padding: 24px 48px 0;
 `
 
-const FooterClass = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
 const HeaderContentTag = styled("div")<{ marginLeft: number }>`
   margin-left: ${(props) => props.marginLeft}px;
   padding: 8px 12px;
@@ -76,6 +72,14 @@ const HeaderContentTag = styled("div")<{ marginLeft: number }>`
 
 const MainContentTag = styled("div")<{ marginLeft: number }>`
   margin-left: ${(props) => props.marginLeft}px;
+  transition: all 0.2s;
+`
+
+const FooterContentTag = styled("div")<{ marginLeft: number }>`
+  margin-left: ${(props) => props.marginLeft}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 0.2s;
 `
 

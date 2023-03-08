@@ -5,36 +5,76 @@ import type { RouteDefinition } from "@solidjs/router"
 
 const routes: RouteDefinition[] = [
   {
-    path: "/",
-    component: lazy(() => import("../layout/pc/SiderLayout")),
+    path: "/pc",
     children: [
       {
-        path: "/home",
-        component: lazy(() => import("../pages/Home")),
+        path: "sider",
+        component: lazy(() => import("@/App/layout/pc/SiderLayout")),
+        children: [
+          {
+            path: "home",
+            component: lazy(() => import("@/App/pages/Home")),
+          },
+          {
+            path: "about",
+            component: lazy(() => import("@/App/pages/About")),
+          },
+        ],
       },
       {
-        path: "/about",
-        component: lazy(() => import("../pages/About")),
+        path: "header",
+        component: lazy(() => import("@/App/layout/pc/HeaderLayout")),
+        children: [
+          {
+            path: "home",
+            component: lazy(() => import("@/App/pages/Home")),
+          },
+          {
+            path: "about",
+            component: lazy(() => import("@/App/pages/About")),
+          },
+        ],
       },
     ],
   },
   {
-    path: "/headerlayout",
-    component: lazy(() => import("../layout/pc/HeaderLayout")),
+    path: "/mobile",
     children: [
       {
-        path: "/home",
-        component: lazy(() => import("../pages/Home")),
-      },
-      {
-        path: "/about",
-        component: lazy(() => import("../pages/About")),
+        path: "bg",
+        component: lazy(() => import("@/App/layout/mobile/BgImageLayout")),
+        children: [
+          {
+            path: "home",
+            component: lazy(() => import("@/App/pages/Home")),
+          },
+          {
+            path: "about",
+            component: lazy(() => import("@/App/pages/About")),
+          },
+        ],
       },
     ],
   },
   {
+    path: "/pc/sider",
+    element: () => <Navigate href="/pc/sider/home" />,
+  },
+  {
+    path: "/pc",
+    element: () => <Navigate href="/pc/sider" />,
+  },
+  {
+    path: "/mobile/bg",
+    element: () => <Navigate href="/mobile/bg/home" />,
+  },
+  {
+    path: "/mobile",
+    element: () => <Navigate href="/mobile/bg" />,
+  },
+  {
     path: "/",
-    element: () => <Navigate href="/home" />,
+    element: () => <Navigate href="/pc" />,
   },
 ]
 
